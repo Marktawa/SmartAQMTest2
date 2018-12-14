@@ -112,6 +112,33 @@ var data = google.visualization.arrayToDataTable([
     }      
     </script>
     
+    <script type="text/javascript">
+
+      google.charts.load('current', {
+      'packages': ['map'],
+      // Note: you will need to get a mapsApiKey for your project.
+      // See: https://developers.google.com/chart/interactive/docs/basic_load_libs#load-settings
+      'mapsApiKey': 'AIzaSyCZn2PHzKEdliyYOEWf2drZyvL2onbUHqQ'
+    });
+    google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Lat', 'Long', 'Name'],
+          [-17.918651, 31.097258, 'Airport'],
+          [-17.843656, 31.032272, 'ZPC'],
+          [-17.783576, 31.054619, 'UZ'],
+          [-17.825809, 31.049173, 'Shopping']
+        ]);
+
+        var map = new google.visualization.Map(document.getElementById('map_div'));
+        map.draw(data, {
+          showTooltip: true,
+          showInfoWindow: true
+        });
+      }
+
+</script>
+    
     <style>
       
       /* Remove the navbar's default margin-bottom and rounded borders */ 
@@ -141,6 +168,7 @@ var data = google.visualization.arrayToDataTable([
       </div>
      </div>
     </div>
+    <div class="container-fluid" id="map_div" style="border: 1px solid #ccc"></div>
    <footer class="container-fluid text-center">
   <p>By Mark Munyaka</p>
 </footer>
