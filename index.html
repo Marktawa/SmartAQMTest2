@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Smart AQM System</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+     
+    <script type="text/javascript">
+      // Load the Visualization API and the corechart package.
+      window.onload=function(){
+      google.charts.load('current', {'packages':['corechart']});
+      // Set a callback to run when the Google Visualization API is loaded.
+      google.charts.setOnLoadCallback(drawColumnChart);
+      
+      google.charts.setOnLoadCallback(drawLineChart);
+      
+      var myVar, myVar1, a, b, c, d, e, f, g, h, i, j, k, l, m, n, o;
+a = [23.5, 29.8, 25.1, 32.3, 30.6, 23.5, 29.8, 25.1, 32.3, 30.6, 23.5, 29.8, 25.1, 32.3, 30.6, 23.5, 29.8, 25.1, 32.3, 30.6, 23.5, 29.8, 25.1, 32.3];
+c = [44.2, 47.4, 51.0, 57.7, 49.9, 44.2, 47.4, 51.0, 57.7, 49.9, 44.2, 47.4, 51.0, 57.7, 49.9, 44.2, 47.4, 51.0, 57.7, 49.9, 44.2, 47.4, 51.0, 57.7];
+e = [86.3, 92.2, 84.6, 78.5, 88.0, 86.3, 92.2, 84.6, 78.5, 88.0, 86.3, 92.2, 84.6, 78.5, 88.0, 86.3, 92.2, 84.6, 78.5, 88.0, 86.3, 92.2, 84.6, 78.5];
+g = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"];
+j = a;
+l = c;
+n = e;
+k = 0;
+m = 0;
+o = 0;
+      
+      myVar = setInterval(drawColumnChart, 5000);
+      
+      myVar1 = setInterval(drawLineChart, 5000);
+      // Callback that creates and populates a data table,
+      // instantiates the pie chart, passes in the data and
+      // draws it.
+      function drawColumnChart() {
+var data = google.visualization.arrayToDataTable([
+    ['Gas', 'Concentration', {
+      role: 'style'
+    }],
+    ['CO2', j[k], 'blue'],
+    ['NO2', l[m], 'maroon'],
+    ['SO2', n[o], 'orange'],
+  ]);
+  k++;
+  if (k > 23) {
+    k = 0;
+  }
+  m++;
+  if (m > 23) {
+    m = 0;
+  }
+  o++;
+  if (o > 23) {
+    o = 0;
+  }
+  var options = {
+    title: "Concentration of Air pollutants, in ug/cm^3",
+    bar: {
+      groupWidth: '75%'
+    },
+    legend: {
+      position: 'none'
+    },
+    vAxis: {
+      gridlines: {
+        count: '10'
+      },
+    }
+  };
+       
+      var chart = new google.visualization.ColumnChart(document.getElementById('columnchart_colors'));
+      chart.draw(data, options);
+      }
+      
+      function drawLineChart() {
+  var data = new google.visualization.DataTable();
+  data.addColumn('string', 'Hour');
+  data.addColumn('number', 'CO2');
+  data.addColumn('number', 'NO2');
+  data.addColumn('number', 'SO2');
+  for (b = 0, d = 0, f = 0, i = 0; b < a.length, d < c.length, f < e.length, i < g.length; b++, d++, f++, i++) {
+    data.addRows([
+      [g[i], a[b], c[d], e[f]]
+    ]);
+  }
+  var temp = a.shift();
+  a.push(temp);
+  var temp1 = c.shift();
+  c.push(temp1);
+  var temp2 = e.shift();
+  e.push(temp2);
+  var temp3 = g.shift();
+  g.push(temp3);
+  var options = {
+    title: "Line Chart Visualization",
+    hAxis: {
+      title: 'Time'
+    },
+    vAxis: {
+      title: 'Gas Concentration in ug/cm3'
+    },
+  };
+  var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+  chart.draw(data, options);
+}
+    }      
+    </script>
+    
+    <style>
+      
+      /* Remove the navbar's default margin-bottom and rounded borders */ 
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+      
+       /* Set black background color, white text and some padding */
+      footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
+    </style>
+  </head>
+  <body>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+   <nav class="navbar navbar-inverse">
+     <p class="navbar-text">Smart City Air Quality Monitoring System</p>
+    </nav>
+ <div class="container-fluid">
+   <div class="row">
+      <div class="col-sm-4" id="columnchart_colors" style="border: 1px solid #ccc">
+      </div>
+      <div class="col-sm-8" id="chart_div" style="border: 1px solid #ccc">
+      </div>
+     </div>
+    </div>
+   <footer class="container-fluid text-center">
+  <p>By Mark Munyaka</p>
+</footer>
+
+  </body>
+</html>
